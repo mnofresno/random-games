@@ -2,16 +2,12 @@
 
 namespace Mariano\Randomgames;
 
-class Renderer
-{
-    public function renderGameCode(string $gameCode)
-    {
+class Renderer {
+    public function renderGameCode(string $gameCode) {
         echo $gameCode;
-        exit;
     }
 
-    public function renderLoadingPage()
-    {
+    public function renderLoadingPage() {
         echo '
         <!DOCTYPE html>
         <html lang="en">

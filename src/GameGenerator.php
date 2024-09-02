@@ -2,16 +2,9 @@
 
 namespace Mariano\Randomgames;
 
-use Mariano\Randomgames\Environment;
-use Mariano\Randomgames\LoggerFactory;
-use Mariano\Randomgames\Renderer;
-use Mariano\Randomgames\GameFileManager;
-use Mariano\Randomgames\AssistanceDto;
-use Mariano\Randomgames\CompletionAssistant;
 use Monolog\Logger as MonologLogger; // Import Monolog Logger
 
-class GameGenerator
-{
+class GameGenerator {
     private string $apiKey;
     private string $apiUrl;
     private string $model;
@@ -50,11 +43,11 @@ class GameGenerator
             } else {
                 $this->logger->warning("No unplayed games found. Generating a new game...");
                 $this->renderer->renderLoadingPage();
-                $this->prepareForBackground();
-                $this->logger->debug("Going background...");
-                $this->finishRequest();
-                $this->generateNewGame();
             }
+            $this->prepareForBackground();
+            $this->logger->debug("Going background...");
+            $this->finishRequest();
+            $this->generateNewGame();
         } catch (\Exception $e) {
             $this->logger->error("An error occurred during game generation: " . $e->getMessage());
             error_log("Exception in GameGenerator::generate(): " . $e->getMessage());
@@ -80,8 +73,6 @@ class GameGenerator
 
     private function generateNewGame() {
         $this->logger->info("Starting new game generation...");
-        error_log("Generating a new game...");
-
         try {
             $dto = new AssistanceDto(
                 $this->apiUrl,
@@ -102,11 +93,11 @@ class GameGenerator
             }
         } catch (\Exception $e) {
             $this->logger->error("An error occurred while generating a new game: " . $e->getMessage());
-            error_log("Exception in GameGenerator::generateNewGame(): " . $e->getMessage());
         }
     }
 
     private function getRandomGame(): string {
+        return '';
         $classicGames = ['snake', 'tetris', 'pong', 'pacman', 'space invaders', 'asteroids', 'breakout'];
         $randomGame = $classicGames[array_rand($classicGames)];
         $this->logger->debug("Random game selected: {$randomGame}");

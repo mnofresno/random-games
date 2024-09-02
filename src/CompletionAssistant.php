@@ -62,7 +62,7 @@ class CompletionAssistant {
                 ],
             ],
             'stream' => false,
-            'temperature' => 0,
+            'temperature' => 1,
             'max_tokens' => 10000,
             'stop' => 'FINISH',
         ];

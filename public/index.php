@@ -6,4 +6,3 @@ use Mariano\Randomgames\GameGenerator;
 
 $generator = new GameGenerator();
 $generator->generate();
-

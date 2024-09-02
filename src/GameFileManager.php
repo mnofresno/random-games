@@ -4,8 +4,7 @@ namespace Mariano\Randomgames;
 
 use Monolog\Logger;
 
-class GameFileManager
-{
+class GameFileManager {
     private string $gamesDirectory;
     private string $playedGamesFile;
     private Logger $logger;

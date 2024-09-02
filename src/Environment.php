@@ -4,8 +4,7 @@ namespace Mariano\Randomgames;
 
 use Dotenv\Dotenv;
 
-class Environment
-{
+class Environment {
     private string $apiKey;
     private string $apiUrl;
     private string $model;
