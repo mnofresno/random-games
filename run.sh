@@ -60,7 +60,7 @@ fi
 
 # Run the Docker container with the project directory and .env file mounted as volumes
 echo "Running the Docker container..."
-docker run -d -p 9999:80 --name $CONTAINER_NAME \
+docker run -d -p 127.0.0.1:9999:80 --name $CONTAINER_NAME \
   -e XDEBUG_MODE \
   -v $PROJECT_DIR:/var/www/html:rw \
   -v $ENV_FILE:/var/www/html/.env:ro \
