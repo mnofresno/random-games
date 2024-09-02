@@ -1,0 +1,20 @@
+{
+    "name": "mariano/randomgames",
+    "autoload": {
+        "psr-4": {
+            "Mariano\\Randomgames\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Mariano Fresno",
+            "email": "mnofresno@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.9",
+        "psr/log": "^3.0",
+        "vlucas/phpdotenv": "^5.6",
+        "monolog/monolog": "^3.7"
+    }
+}
