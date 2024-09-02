@@ -77,7 +77,8 @@ class CompletionAssistant {
 
         $responseData = json_decode($response->getBody()->getContents(), true);
         $completionsOutput = $responseData['choices'][0]['message']['content'] ?? 'No response received.';
-        $this->logger->debug("Response: '{$completionsOutput}'");
+        $completionsOutputLength = strlen($completionsOutput);
+        $this->logger->debug("Response from AI has '{$completionsOutputLength}' bytes");
 
         return trim($completionsOutput);
     }

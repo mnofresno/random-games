@@ -23,11 +23,25 @@ else
   echo "Composer dependencies already installed."
 fi
 
-# Set necessary permissions for files and directories
-echo "Setting file and directory permissions..."
+# Ensure necessary files and directories exist and set permissions on the host
+echo "Setting up necessary files and directories with correct permissions on the host..."
+
+if [ ! -f "${PLAYED_GAMES_FILE}" ]; then
+  echo "Creating ${PLAYED_GAMES_FILE}..."
+  touch "${PLAYED_GAMES_FILE}"
+fi
 chmod 666 "${PLAYED_GAMES_FILE}"
-chmod -R 777 "${PROJECT_DIR}/public/games"
-chmod -R 777 "${PROJECT_DIR}/logs"
+
+if [ ! -d "${PROJECT_DIR}/public/games" ]; then
+  echo "Creating public/games directory..."
+  mkdir -p "${PROJECT_DIR}/public/games"
+fi
+
+# Ensure the .env file exists
+if [ ! -f "$ENV_FILE" ]; then
+  echo "Error: .env file not found in the project directory. Please create it before running the script."
+  exit 1
+fi
 
 # Check if Docker image exists; if not, build it
 if [[ "$(docker images -q $IMAGE_NAME 2> /dev/null)" == "" ]]; then
@@ -44,17 +58,17 @@ if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
   docker rm $CONTAINER_NAME
 fi
 
-# Ensure the .env file exists
-if [ ! -f "$ENV_FILE" ]; then
-  echo "Error: .env file not found in the project directory. Please create it before running the script."
-  exit 1
-fi
-
-# Run the Docker container with the project directory mounted as a volume
+# Run the Docker container with the project directory and .env file mounted as volumes
 echo "Running the Docker container..."
 docker run -d -p 9999:80 --name $CONTAINER_NAME \
+  -e XDEBUG_MODE \
   -v $PROJECT_DIR:/var/www/html:rw \
+  -v $ENV_FILE:/var/www/html/.env:ro \
   $IMAGE_NAME
+
+# Ensure correct permissions inside the container
+echo "Setting permissions inside the Docker container..."
+docker exec $CONTAINER_NAME sh -c 'chmod -R 777 /var/www/html/public/games && chmod 666 /var/www/html/already_played_games.txt'
 
 echo "Container is running. Access the game at http://localhost:9999"
 

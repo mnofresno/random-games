@@ -109,6 +109,10 @@ Generate the complete HTML code for classic games like Snake, Tetris, Pong, Pacm
 
 6. **Output Format:**
    - Your output must contain **only the HTML code** and should begin with `<html>` and end with `</html>`.
+   - Include the favicon link in the `<head>` section of the HTML as follows:
+     ```html
+     <link rel="icon" href="favicon.png" type="image/png">
+     ```
    - Add a comment at the beginning of the HTML code in the format: `<!--- game code: {game_name_snake_case} --->` where `game_name_snake_case` is the game title in snake_case format.
    - Do **not** use any formatting markers like "```html" or "```" for code blocks.
    - Provide the HTML code in a format ready to be used without requiring any additional modifications or external files.
