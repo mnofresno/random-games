@@ -21,7 +21,7 @@ class GameGenerator
 
     public function __construct() {
         $cwd = getcwd();
-        $dotenv = Dotenv::createImmutable("$cwd");
+        $dotenv = Dotenv::createImmutable("$cwd/..");
         $dotenv->load();
 
         $this->apiKey = $_ENV['OPENAI_API_KEY'];
