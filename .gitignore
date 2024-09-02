@@ -1,5 +1,7 @@
 public/games/*.html
 already_played_games.txt
 *.env
+vendor
 .env
 *.log
+*.pid
